@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^2.1.9",
+    "frontend": "file:",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
