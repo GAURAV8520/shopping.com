@@ -27,7 +27,8 @@ const userSchema = new mongoose.Schema({
 
     purchaseditems:[
         {
-            
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Product"
         }
     ]
    
