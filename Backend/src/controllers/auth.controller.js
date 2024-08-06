@@ -63,30 +63,63 @@ export const SiginUp= async (req,res)=>{
 }
 
 
-// export const login = async (req,res) =>{
+export const login = async (req,res) =>{
     
-//     try {
+    try {
 
-//         const {username,password}=req.body;
+        const {username,password}=req.body;
+        const user = await User.findOne({username})
 
-//         const user = await User.findOne({username})
+        if(!user){
+            res.status(404).json({error:"username not found "})
+        }
+
+        if(password?.length<6){
+            res.status(404).json({error:"password must be of 6 character"})
+        }
+
+        const match = await bcrypt.compare(password, user?.password || "");
+
+        if(!match){
+            res.status(404).json({error:"password is not correct "})
+        }
+
+        generateTokenAndSetCookie(user._id,res);
+ 
+        res.status(200).json({
+            _id:user._id,
+            username:user.username,
+            email:user.email,
+        })
 
         
+    } catch (error) {
+        console.log("error in login controller :",error.message);
+        res.status(500).json({error:"Internal server error"})
+    }
 
+}
 
-
-//         if(!user){
-//             res.status(404).json({error:"username not found "})
-//         }
-
-
-
-
-
+export const logout= async (req,res)=>{
+    try {
+        res.cookie("jwt","",{maxAge:0});
+        res.status(200).json({error:"logout successfully"})
         
-//     } catch (error) {
-        
-//     }
+    } catch (error) {
+        console.log("error in logout controller :",error.message);
+        res.status(500).json({error:"Internal server error"})
+    }
+}
 
-// }
+export const getme= async (req,res)=>{
+    try {
+
+        const user = await User.findById(req.user._id).select("-password")
+        res.status(200).json({user})
+        
+    } catch (error) {
+        console.log("error in getme controller :",error.message);
+        res.status(500).json({error:"Internal server error"})
+    }
+}
 
