@@ -21,9 +21,23 @@ const userSchema = new mongoose.Schema({
 
     },
 
+    typeofUser:{
+        type:String,
+        required:['student','company'],
+        default:'student',
+    },
+
     profileimg:{
         type:String
     },
+
+    productforsale:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Product"
+        }
+    ],
+
 
     purchaseditems:[
         {

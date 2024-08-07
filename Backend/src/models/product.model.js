@@ -21,6 +21,10 @@ const productSchema = new mongoos.Schema({
         type:Number,
         required:true,
         default:0
+    },
+    numberofitems:{
+        type:Number,
+        default:0
     }
 },{timestamps:true});
 
