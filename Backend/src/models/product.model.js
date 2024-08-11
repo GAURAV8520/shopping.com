@@ -8,13 +8,11 @@ const productSchema = new mongoos.Schema({
     },
     photo:{
         type:String,
-        required:true
 
     },
 
     description:{
         type:String,
-        
     },
 
     price:{

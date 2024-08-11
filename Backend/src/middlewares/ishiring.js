@@ -26,7 +26,7 @@ export const ishiring =async (req,res,next)=>{
 
         const user = await User.findById(decoded.userId).select("-password")
         
-        if(!user.typeofUser != 'company'){
+        if(user.typeofUser != 'company'){
             return res.status(404).json({error:"you cannot post a job"})
         }
 

@@ -45,6 +45,7 @@ const profileMenuItems = [
   {
     label: "Sign Out",
     icon: PowerIcon,
+    
   },
 ];
  
@@ -146,6 +147,7 @@ function ProfileMenu() {
                 variant="small"
                 className="font-normal"
                 color={isLastItem ? "red" : "inherit"}
+                
               >
                 {label}
               </Typography>
@@ -177,7 +179,7 @@ export function ComplexNavbar() {
         
             <Typography
             as="a"
-            href="#"
+            href="/"
             className="mr-4 ml-2 cursor-pointer py-1.5  font-bold text-xl pr-7"
             >
             Shopping.com

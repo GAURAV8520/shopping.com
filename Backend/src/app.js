@@ -19,6 +19,10 @@ app.use('/api/add',addproduct);
 
 
 
+
+
 app.get('/',(req,res)=>res.send("APi running at port 800"))
+
+
 
 export {app};

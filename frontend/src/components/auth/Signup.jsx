@@ -101,13 +101,31 @@ import { useState } from "react";
               onChange={handlechange}
             />
           </div>
+          <Checkbox
+          label={
+            <Typography
+              variant="small"
+              color="gray"
+              className="flex items-center font-normal"
+            >
+              Signup as company
+              <a
+                href="#"
+                className="font-medium transition-colors hover:text-gray-900"
+              >
+                &nbsp;
+              </a>
+            </Typography>
+          }
+          containerProps={{ className: "-ml-2.5" }}
+        />
           
           <Button className="mt-6" fullWidth type="submit">
             sign up
           </Button>
           <Typography color="gray" className="mt-4 text-center font-normal">
             Already have an account?{" "}
-            <a href="#" className="font-medium text-red-800" >
+            <a href="/signin" className="font-medium text-red-800" >
               Sign In
             </a>
           </Typography>
