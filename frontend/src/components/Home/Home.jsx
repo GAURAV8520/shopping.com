@@ -1,6 +1,7 @@
 import React from 'react'
 import ComplexNavbar from '../common/Navbar'
 import Footer from '../common/Footer'
+import Addproduct from '../uploadproduct/Addproduct'
 
 function Home() {
   return (
@@ -8,7 +9,9 @@ function Home() {
     <div className='mt-0'>
       <ComplexNavbar />
     </div>
-    <div className='flex-grow'></div>
+    <div className='flex-grow'>
+      <Addproduct/>
+    </div>
     <div className='mb-0'>
       <Footer/>
     </div>
