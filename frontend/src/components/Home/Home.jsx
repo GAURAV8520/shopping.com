@@ -9,7 +9,7 @@ function Home() {
     <div className='mt-0'>
       <ComplexNavbar />
     </div>
-    <div className='flex-grow'>
+    <div className='flex items-center justify-center'>
       <Addproduct/>
     </div>
     <div className='mb-0'>

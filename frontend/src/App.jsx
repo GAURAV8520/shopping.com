@@ -4,6 +4,7 @@ import Sigin from "./components/auth/Sigin"
 
 import { Route, Routes } from "react-router-dom"
 import Home from "./components/Home/Home"
+import Job from "./components/Job/Job"
 
 function App() {
   
@@ -17,6 +18,7 @@ function App() {
       <Route path="/signup" element={<SimpleRegistrationForm/>}/>
       <Route path="/signin" element={<Sigin/>}/>
       <Route path="/" element={<Home/>}/>
+      <Route path="/job" element={<Job/>}/>
     </Routes>
 
 

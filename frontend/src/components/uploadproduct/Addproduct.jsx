@@ -1,133 +1,135 @@
 import {
     Card,
     Input,
-    Checkbox,
     Button,
     Typography,
   } from "@material-tailwind/react";
-import React from 'react'
-
-import { useState } from "react";
-
-function Addproduct() {
-    const [user,setUser]=useState({
-        username:"",
-        email:"",
-        password:""
+  import React, { useState, useRef } from 'react';
+  
+  function Addproduct() {
+    const [user, setUser] = useState({
+      photo: "",
+      username: "",
+      email: "",
+      price: 0,
+      numberofitems: 0,
     });
     const [userinfo, setUserinfo] = useState(null);
-
-    
-
-   // const [userinfo , setUserinfo]=useState([]);
-
-    const handlechange=(e)=>{
-        setUser({...user,[e.target.name]:e.target.value});
-
-       
+  
+    // Create a reference for the hidden file input
+    const fileInputRef = useRef(null);
+  
+    const handlechange = (e) => {
+      setUser({ ...user, [e.target.name]: e.target.value });
     };
-
-    const handleSubmit =(e)=>{
-
-      
-        e.preventDefault();
-        
-        setUserinfo(user);
-        console.log(userinfo)
-      
-    }
-  return (
-    <div>
-        <Card color="transparent" shadow={false}>
-        <Typography variant="h4" color="blue-gray" className="text-center">
-          Sign Up
-        </Typography>
-        {/* <Typography color="gray" className="mt-1 font-normal">
-          Nice to meet you! Enter your details to register.
-        </Typography> */}
-        <form className="mt-4 mb-2 w-80 max-w-screen-lg sm:w-96" onSubmit={handleSubmit}>
-          <div className="mb-1 flex flex-col gap-6">
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Your Name
-            </Typography>
-            <Input
-              size="lg"
-              name="username"
-              placeholder="name"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-              value={user.username}
-              onChange={handlechange}
-
-
-              
-            />
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Your Email
-            </Typography>
-            <Input
-              size="lg"
-              type="email"
-              name="email"
-              placeholder="name@mail.com"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-              value={user.email}
-              onChange={handlechange}
-            />
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Password
-            </Typography>
-            <Input
-              type="password"
-              size="lg"
-              name="password"
-              placeholder="********"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-              value={user.password}
-              onChange={handlechange}
-            />
-          </div>
-          <Checkbox
-          label={
-            <Typography
-              variant="small"
-              color="gray"
-              className="flex items-center font-normal"
-            >
-              Signup as company
-              <a
-                href="#"
-                className="font-medium transition-colors hover:text-gray-900"
-              >
-                &nbsp;
-              </a>
-            </Typography>
-          }
-          containerProps={{ className: "-ml-2.5" }}
-        />
-          
-          <Button className="mt-6" fullWidth type="submit">
-            sign up
-          </Button>
-          <Typography color="gray" className="mt-4 text-center font-normal">
-            Already have an account?{" "}
-            <a href="/signin" className="font-medium text-red-800" >
-              Sign In
-            </a>
+  
+    const handleFileChange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        setUser({ ...user, photo: file.name }); // You can store the file name or the file itself
+      }
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      setUserinfo(user);
+      console.log(userinfo);
+    };
+  
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <Card color="white" shadow={true} className="p-6 max-w-lg w-full">
+          <Typography variant="h4" color="blue-gray" className="text-center mb-4">
+            Add Product
           </Typography>
-        </form>
-      </Card>
-      
-    </div>
-  )
-}
-
-export default Addproduct
+          <form onSubmit={handleSubmit}>
+            <div className="flex flex-col gap-4">
+              <div>
+                <Typography variant="h6" color="blue-gray" className="mb-2">
+                  Product Photo
+                </Typography>
+                <div
+                  className="flex items-center justify-center bg-gray-100 border border-dashed border-gray-300 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition"
+                  onClick={() => fileInputRef.current.click()} // Trigger file input click
+                >
+                  <input
+                    type="file"
+                    name="photo"
+                    ref={fileInputRef} // Associate the ref with the input
+                    onChange={handleFileChange} // Handle file selection
+                    className="hidden"
+                  />
+                  <span className="text-blue-500">
+                    {user.photo || "Click to upload"}
+                  </span>
+                </div>
+              </div>
+              <div>
+                <Typography variant="h6" color="blue-gray" className="mb-2">
+                  Product Name
+                </Typography>
+                <Input
+                  size="lg"
+                  name="username"
+                  placeholder="Enter product name"
+                  className="border-gray-300 focus:border-blue-500"
+                  value={user.username}
+                  onChange={handlechange}
+                />
+              </div>
+              <div>
+                <Typography variant="h6" color="blue-gray" className="mb-2">
+                  Description
+                </Typography>
+                <Input
+                  size="lg"
+                  type="text"
+                  name="email"
+                  placeholder="Enter description"
+                  className="border-gray-300 focus:border-blue-500"
+                  value={user.email}
+                  onChange={handlechange}
+                />
+              </div>
+              <div className="flex gap-4">
+                <div className="w-1/2">
+                  <Typography variant="h6" color="blue-gray" className="mb-2">
+                    Price
+                  </Typography>
+                  <Input
+                    size="lg"
+                    name="price"
+                    type="Number"
+                    placeholder="Enter price"
+                    className="border-gray-300 focus:border-blue-500"
+                    value={user.price}
+                    onChange={handlechange}
+                  />
+                </div>
+                <div className="w-1/2">
+                  <Typography variant="h6" color="blue-gray" className="mb-2">
+                    Number of Items
+                  </Typography>
+                  <Input
+                    size="lg"
+                    name="numberofitems"
+                    type="Number"
+                    placeholder="Enter quantity"
+                    className="border-gray-300 focus:border-blue-500"
+                    value={user.numberofitems}
+                    onChange={handlechange}
+                  />
+                </div>
+              </div>
+            </div>
+            <Button className="mt-6 bg-blue-500 hover:bg-blue-600" fullWidth type="submit">
+              Add Product
+            </Button>
+          </form>
+        </Card>
+      </div>
+    );
+  }
+  
+  export default Addproduct;
+  
